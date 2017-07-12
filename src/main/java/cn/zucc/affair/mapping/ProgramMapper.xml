@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.ProgramMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.Program" >
+    <id column="pg_id" property="pgId" jdbcType="INTEGER" />
+    <result column="pg_name" property="pgName" jdbcType="VARCHAR" />
+    <result column="pg _type_id" property="pgTypeId" jdbcType="INTEGER" />
+    <result column="pg_starttime" property="pgStarttime" jdbcType="TIMESTAMP" />
+    <result column="pg_endtime" property="pgEndtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pg_id, pg_name, "pg _type_id", pg_starttime, pg_endtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.ProgramExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from program
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from program
+    where pg_id = #{pgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from program
+    where pg_id = #{pgId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.ProgramExample" >
+    delete from program
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.Program" >
+    insert into program (pg_id, pg_name, "pg _type_id", 
+      pg_starttime, pg_endtime)
+    values (#{pgId,jdbcType=INTEGER}, #{pgName,jdbcType=VARCHAR}, #{pgTypeId,jdbcType=INTEGER}, 
+      #{pgStarttime,jdbcType=TIMESTAMP}, #{pgEndtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.Program" >
+    insert into program
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pgId != null" >
+        pg_id,
+      </if>
+      <if test="pgName != null" >
+        pg_name,
+      </if>
+      <if test="pgTypeId != null" >
+        "pg _type_id",
+      </if>
+      <if test="pgStarttime != null" >
+        pg_starttime,
+      </if>
+      <if test="pgEndtime != null" >
+        pg_endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pgId != null" >
+        #{pgId,jdbcType=INTEGER},
+      </if>
+      <if test="pgName != null" >
+        #{pgName,jdbcType=VARCHAR},
+      </if>
+      <if test="pgTypeId != null" >
+        #{pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pgStarttime != null" >
+        #{pgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pgEndtime != null" >
+        #{pgEndtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.ProgramExample" resultType="java.lang.Integer" >
+    select count(*) from program
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update program
+    <set >
+      <if test="record.pgId != null" >
+        pg_id = #{record.pgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgName != null" >
+        pg_name = #{record.pgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pgTypeId != null" >
+        "pg _type_id" = #{record.pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgStarttime != null" >
+        pg_starttime = #{record.pgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pgEndtime != null" >
+        pg_endtime = #{record.pgEndtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update program
+    set pg_id = #{record.pgId,jdbcType=INTEGER},
+      pg_name = #{record.pgName,jdbcType=VARCHAR},
+      "pg _type_id" = #{record.pgTypeId,jdbcType=INTEGER},
+      pg_starttime = #{record.pgStarttime,jdbcType=TIMESTAMP},
+      pg_endtime = #{record.pgEndtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.Program" >
+    update program
+    <set >
+      <if test="pgName != null" >
+        pg_name = #{pgName,jdbcType=VARCHAR},
+      </if>
+      <if test="pgTypeId != null" >
+        "pg _type_id" = #{pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pgStarttime != null" >
+        pg_starttime = #{pgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pgEndtime != null" >
+        pg_endtime = #{pgEndtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pg_id = #{pgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.Program" >
+    update program
+    set pg_name = #{pgName,jdbcType=VARCHAR},
+      "pg _type_id" = #{pgTypeId,jdbcType=INTEGER},
+      pg_starttime = #{pgStarttime,jdbcType=TIMESTAMP},
+      pg_endtime = #{pgEndtime,jdbcType=TIMESTAMP}
+    where pg_id = #{pgId,jdbcType=INTEGER}
+  </update>
+</mapper>

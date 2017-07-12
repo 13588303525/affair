@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.User" >
+    <id column="u_id" property="uId" jdbcType="VARCHAR" />
+    <result column="u_pwd" property="uPwd" jdbcType="VARCHAR" />
+    <result column="u_name" property="uName" jdbcType="VARCHAR" />
+    <result column="u_power" property="uPower" jdbcType="VARCHAR" />
+    <result column="u_ocpy" property="uOcpy" jdbcType="VARCHAR" />
+    <result column="u_unit" property="uUnit" jdbcType="VARCHAR" />
+    <result column="c_id" property="cId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    u_id, u_pwd, u_name, u_power, u_ocpy, u_unit, c_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where u_id = #{uId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where u_id = #{uId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.User" >
+    insert into user (u_id, u_pwd, u_name, 
+      u_power, u_ocpy, u_unit, 
+      c_id)
+    values (#{uId,jdbcType=VARCHAR}, #{uPwd,jdbcType=VARCHAR}, #{uName,jdbcType=VARCHAR}, 
+      #{uPower,jdbcType=VARCHAR}, #{uOcpy,jdbcType=VARCHAR}, #{uUnit,jdbcType=VARCHAR}, 
+      #{cId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="uPwd != null" >
+        u_pwd,
+      </if>
+      <if test="uName != null" >
+        u_name,
+      </if>
+      <if test="uPower != null" >
+        u_power,
+      </if>
+      <if test="uOcpy != null" >
+        u_ocpy,
+      </if>
+      <if test="uUnit != null" >
+        u_unit,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPwd != null" >
+        #{uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPower != null" >
+        #{uPower,jdbcType=VARCHAR},
+      </if>
+      <if test="uOcpy != null" >
+        #{uOcpy,jdbcType=VARCHAR},
+      </if>
+      <if test="uUnit != null" >
+        #{uUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uPwd != null" >
+        u_pwd = #{record.uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uName != null" >
+        u_name = #{record.uName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uPower != null" >
+        u_power = #{record.uPower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uOcpy != null" >
+        u_ocpy = #{record.uOcpy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uUnit != null" >
+        u_unit = #{record.uUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set u_id = #{record.uId,jdbcType=VARCHAR},
+      u_pwd = #{record.uPwd,jdbcType=VARCHAR},
+      u_name = #{record.uName,jdbcType=VARCHAR},
+      u_power = #{record.uPower,jdbcType=VARCHAR},
+      u_ocpy = #{record.uOcpy,jdbcType=VARCHAR},
+      u_unit = #{record.uUnit,jdbcType=VARCHAR},
+      c_id = #{record.cId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.User" >
+    update user
+    <set >
+      <if test="uPwd != null" >
+        u_pwd = #{uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPower != null" >
+        u_power = #{uPower,jdbcType=VARCHAR},
+      </if>
+      <if test="uOcpy != null" >
+        u_ocpy = #{uOcpy,jdbcType=VARCHAR},
+      </if>
+      <if test="uUnit != null" >
+        u_unit = #{uUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.User" >
+    update user
+    set u_pwd = #{uPwd,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      u_power = #{uPower,jdbcType=VARCHAR},
+      u_ocpy = #{uOcpy,jdbcType=VARCHAR},
+      u_unit = #{uUnit,jdbcType=VARCHAR},
+      c_id = #{cId,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=VARCHAR}
+  </update>
+  
+  ·
+  
+</mapper>

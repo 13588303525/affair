@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.ProgramTypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.ProgramType" >
+    <id column="pg_type_id" property="pgTypeId" jdbcType="INTEGER" />
+    <result column="pg_type_name" property="pgTypeName" jdbcType="VARCHAR" />
+    <result column="pt_facility" property="ptFacility" jdbcType="DOUBLE" />
+    <result column="pt_material" property="ptMaterial" jdbcType="DOUBLE" />
+    <result column="pt_travel_cost" property="ptTravelCost" jdbcType="DOUBLE" />
+    <result column="pt_labour_service" property="ptLabourService" jdbcType="DOUBLE" />
+    <result column="pt_meeting_fee" property="ptMeetingFee" jdbcType="DOUBLE" />
+    <result column="pt_spur_fee" property="ptSpurFee" jdbcType="DOUBLE" />
+    <result column="pt_test_processing_fee" property="ptTestProcessingFee" jdbcType="DOUBLE" />
+    <result column="pt_fuel_power_fee" property="ptFuelPowerFee" jdbcType="DOUBLE" />
+    <result column="pt_managment_fee" property="ptManagmentFee" jdbcType="DOUBLE" />
+    <result column="pt_cooperation_fee" property="ptCooperationFee" jdbcType="DOUBLE" />
+    <result column="pt_publish_fee" property="ptPublishFee" jdbcType="DOUBLE" />
+    <result column="pt_expert_consultation" property="ptExpertConsultation" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pg_type_id, pg_type_name, pt_facility, pt_material, pt_travel_cost, pt_labour_service, 
+    pt_meeting_fee, pt_spur_fee, pt_test_processing_fee, pt_fuel_power_fee, pt_managment_fee, 
+    pt_cooperation_fee, pt_publish_fee, pt_expert_consultation
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.ProgramTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from program_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from program_type
+    where pg_type_id = #{pgTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from program_type
+    where pg_type_id = #{pgTypeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.ProgramTypeExample" >
+    delete from program_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.ProgramType" >
+    insert into program_type (pg_type_id, pg_type_name, pt_facility, 
+      pt_material, pt_travel_cost, pt_labour_service, 
+      pt_meeting_fee, pt_spur_fee, pt_test_processing_fee, 
+      pt_fuel_power_fee, pt_managment_fee, pt_cooperation_fee, 
+      pt_publish_fee, pt_expert_consultation)
+    values (#{pgTypeId,jdbcType=INTEGER}, #{pgTypeName,jdbcType=VARCHAR}, #{ptFacility,jdbcType=DOUBLE}, 
+      #{ptMaterial,jdbcType=DOUBLE}, #{ptTravelCost,jdbcType=DOUBLE}, #{ptLabourService,jdbcType=DOUBLE}, 
+      #{ptMeetingFee,jdbcType=DOUBLE}, #{ptSpurFee,jdbcType=DOUBLE}, #{ptTestProcessingFee,jdbcType=DOUBLE}, 
+      #{ptFuelPowerFee,jdbcType=DOUBLE}, #{ptManagmentFee,jdbcType=DOUBLE}, #{ptCooperationFee,jdbcType=DOUBLE}, 
+      #{ptPublishFee,jdbcType=DOUBLE}, #{ptExpertConsultation,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.ProgramType" >
+    insert into program_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pgTypeId != null" >
+        pg_type_id,
+      </if>
+      <if test="pgTypeName != null" >
+        pg_type_name,
+      </if>
+      <if test="ptFacility != null" >
+        pt_facility,
+      </if>
+      <if test="ptMaterial != null" >
+        pt_material,
+      </if>
+      <if test="ptTravelCost != null" >
+        pt_travel_cost,
+      </if>
+      <if test="ptLabourService != null" >
+        pt_labour_service,
+      </if>
+      <if test="ptMeetingFee != null" >
+        pt_meeting_fee,
+      </if>
+      <if test="ptSpurFee != null" >
+        pt_spur_fee,
+      </if>
+      <if test="ptTestProcessingFee != null" >
+        pt_test_processing_fee,
+      </if>
+      <if test="ptFuelPowerFee != null" >
+        pt_fuel_power_fee,
+      </if>
+      <if test="ptManagmentFee != null" >
+        pt_managment_fee,
+      </if>
+      <if test="ptCooperationFee != null" >
+        pt_cooperation_fee,
+      </if>
+      <if test="ptPublishFee != null" >
+        pt_publish_fee,
+      </if>
+      <if test="ptExpertConsultation != null" >
+        pt_expert_consultation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pgTypeId != null" >
+        #{pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pgTypeName != null" >
+        #{pgTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ptFacility != null" >
+        #{ptFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="ptMaterial != null" >
+        #{ptMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="ptTravelCost != null" >
+        #{ptTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="ptLabourService != null" >
+        #{ptLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="ptMeetingFee != null" >
+        #{ptMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptSpurFee != null" >
+        #{ptSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptTestProcessingFee != null" >
+        #{ptTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptFuelPowerFee != null" >
+        #{ptFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptManagmentFee != null" >
+        #{ptManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptCooperationFee != null" >
+        #{ptCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptPublishFee != null" >
+        #{ptPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptExpertConsultation != null" >
+        #{ptExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.ProgramTypeExample" resultType="java.lang.Integer" >
+    select count(*) from program_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update program_type
+    <set >
+      <if test="record.pgTypeId != null" >
+        pg_type_id = #{record.pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgTypeName != null" >
+        pg_type_name = #{record.pgTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptFacility != null" >
+        pt_facility = #{record.ptFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptMaterial != null" >
+        pt_material = #{record.ptMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptTravelCost != null" >
+        pt_travel_cost = #{record.ptTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptLabourService != null" >
+        pt_labour_service = #{record.ptLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptMeetingFee != null" >
+        pt_meeting_fee = #{record.ptMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptSpurFee != null" >
+        pt_spur_fee = #{record.ptSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptTestProcessingFee != null" >
+        pt_test_processing_fee = #{record.ptTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptFuelPowerFee != null" >
+        pt_fuel_power_fee = #{record.ptFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptManagmentFee != null" >
+        pt_managment_fee = #{record.ptManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptCooperationFee != null" >
+        pt_cooperation_fee = #{record.ptCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptPublishFee != null" >
+        pt_publish_fee = #{record.ptPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ptExpertConsultation != null" >
+        pt_expert_consultation = #{record.ptExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update program_type
+    set pg_type_id = #{record.pgTypeId,jdbcType=INTEGER},
+      pg_type_name = #{record.pgTypeName,jdbcType=VARCHAR},
+      pt_facility = #{record.ptFacility,jdbcType=DOUBLE},
+      pt_material = #{record.ptMaterial,jdbcType=DOUBLE},
+      pt_travel_cost = #{record.ptTravelCost,jdbcType=DOUBLE},
+      pt_labour_service = #{record.ptLabourService,jdbcType=DOUBLE},
+      pt_meeting_fee = #{record.ptMeetingFee,jdbcType=DOUBLE},
+      pt_spur_fee = #{record.ptSpurFee,jdbcType=DOUBLE},
+      pt_test_processing_fee = #{record.ptTestProcessingFee,jdbcType=DOUBLE},
+      pt_fuel_power_fee = #{record.ptFuelPowerFee,jdbcType=DOUBLE},
+      pt_managment_fee = #{record.ptManagmentFee,jdbcType=DOUBLE},
+      pt_cooperation_fee = #{record.ptCooperationFee,jdbcType=DOUBLE},
+      pt_publish_fee = #{record.ptPublishFee,jdbcType=DOUBLE},
+      pt_expert_consultation = #{record.ptExpertConsultation,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.ProgramType" >
+    update program_type
+    <set >
+      <if test="pgTypeName != null" >
+        pg_type_name = #{pgTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ptFacility != null" >
+        pt_facility = #{ptFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="ptMaterial != null" >
+        pt_material = #{ptMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="ptTravelCost != null" >
+        pt_travel_cost = #{ptTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="ptLabourService != null" >
+        pt_labour_service = #{ptLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="ptMeetingFee != null" >
+        pt_meeting_fee = #{ptMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptSpurFee != null" >
+        pt_spur_fee = #{ptSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptTestProcessingFee != null" >
+        pt_test_processing_fee = #{ptTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptFuelPowerFee != null" >
+        pt_fuel_power_fee = #{ptFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptManagmentFee != null" >
+        pt_managment_fee = #{ptManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptCooperationFee != null" >
+        pt_cooperation_fee = #{ptCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptPublishFee != null" >
+        pt_publish_fee = #{ptPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="ptExpertConsultation != null" >
+        pt_expert_consultation = #{ptExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where pg_type_id = #{pgTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.ProgramType" >
+    update program_type
+    set pg_type_name = #{pgTypeName,jdbcType=VARCHAR},
+      pt_facility = #{ptFacility,jdbcType=DOUBLE},
+      pt_material = #{ptMaterial,jdbcType=DOUBLE},
+      pt_travel_cost = #{ptTravelCost,jdbcType=DOUBLE},
+      pt_labour_service = #{ptLabourService,jdbcType=DOUBLE},
+      pt_meeting_fee = #{ptMeetingFee,jdbcType=DOUBLE},
+      pt_spur_fee = #{ptSpurFee,jdbcType=DOUBLE},
+      pt_test_processing_fee = #{ptTestProcessingFee,jdbcType=DOUBLE},
+      pt_fuel_power_fee = #{ptFuelPowerFee,jdbcType=DOUBLE},
+      pt_managment_fee = #{ptManagmentFee,jdbcType=DOUBLE},
+      pt_cooperation_fee = #{ptCooperationFee,jdbcType=DOUBLE},
+      pt_publish_fee = #{ptPublishFee,jdbcType=DOUBLE},
+      pt_expert_consultation = #{ptExpertConsultation,jdbcType=DOUBLE}
+    where pg_type_id = #{pgTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

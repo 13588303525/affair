@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.SummaryPropertyMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.SummaryProperty" >
+    <id column="sp_id" property="spId" jdbcType="INTEGER" />
+    <result column="sp_1" property="sp1" jdbcType="DOUBLE" />
+    <result column="sp_2" property="sp2" jdbcType="DOUBLE" />
+    <result column="sp_3" property="sp3" jdbcType="DOUBLE" />
+    <result column="sp_4" property="sp4" jdbcType="DOUBLE" />
+    <result column="sp_5" property="sp5" jdbcType="DOUBLE" />
+    <result column="sp_6" property="sp6" jdbcType="DOUBLE" />
+    <result column="sp_7" property="sp7" jdbcType="DOUBLE" />
+    <result column="sp_8" property="sp8" jdbcType="DOUBLE" />
+    <result column="sp_9" property="sp9" jdbcType="DOUBLE" />
+    <result column="sp_10" property="sp10" jdbcType="DOUBLE" />
+    <result column="sp_11" property="sp11" jdbcType="DOUBLE" />
+    <result column="sp_12" property="sp12" jdbcType="DOUBLE" />
+    <result column="sp_13" property="sp13" jdbcType="DOUBLE" />
+    <result column="sp_14" property="sp14" jdbcType="DOUBLE" />
+    <result column="sp_15" property="sp15" jdbcType="DOUBLE" />
+    <result column="sp_16" property="sp16" jdbcType="DOUBLE" />
+    <result column="sp_17" property="sp17" jdbcType="DOUBLE" />
+    <result column="sp_18" property="sp18" jdbcType="DOUBLE" />
+    <result column="sp_19" property="sp19" jdbcType="DOUBLE" />
+    <result column="sp_20" property="sp20" jdbcType="DOUBLE" />
+    <result column="sp_21" property="sp21" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sp_id, sp_1, sp_2, sp_3, sp_4, sp_5, sp_6, sp_7, sp_8, sp_9, sp_10, sp_11, sp_12, 
+    sp_13, sp_14, sp_15, sp_16, sp_17, sp_18, sp_19, sp_20, sp_21
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.SummaryPropertyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from summary_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from summary_property
+    where sp_id = #{spId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from summary_property
+    where sp_id = #{spId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.SummaryPropertyExample" >
+    delete from summary_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.SummaryProperty" >
+    insert into summary_property (sp_id, sp_1, sp_2, 
+      sp_3, sp_4, sp_5, sp_6, 
+      sp_7, sp_8, sp_9, sp_10, 
+      sp_11, sp_12, sp_13, sp_14, 
+      sp_15, sp_16, sp_17, sp_18, 
+      sp_19, sp_20, sp_21)
+    values (#{spId,jdbcType=INTEGER}, #{sp1,jdbcType=DOUBLE}, #{sp2,jdbcType=DOUBLE}, 
+      #{sp3,jdbcType=DOUBLE}, #{sp4,jdbcType=DOUBLE}, #{sp5,jdbcType=DOUBLE}, #{sp6,jdbcType=DOUBLE}, 
+      #{sp7,jdbcType=DOUBLE}, #{sp8,jdbcType=DOUBLE}, #{sp9,jdbcType=DOUBLE}, #{sp10,jdbcType=DOUBLE}, 
+      #{sp11,jdbcType=DOUBLE}, #{sp12,jdbcType=DOUBLE}, #{sp13,jdbcType=DOUBLE}, #{sp14,jdbcType=DOUBLE}, 
+      #{sp15,jdbcType=DOUBLE}, #{sp16,jdbcType=DOUBLE}, #{sp17,jdbcType=DOUBLE}, #{sp18,jdbcType=DOUBLE}, 
+      #{sp19,jdbcType=DOUBLE}, #{sp20,jdbcType=DOUBLE}, #{sp21,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.SummaryProperty" >
+    insert into summary_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spId != null" >
+        sp_id,
+      </if>
+      <if test="sp1 != null" >
+        sp_1,
+      </if>
+      <if test="sp2 != null" >
+        sp_2,
+      </if>
+      <if test="sp3 != null" >
+        sp_3,
+      </if>
+      <if test="sp4 != null" >
+        sp_4,
+      </if>
+      <if test="sp5 != null" >
+        sp_5,
+      </if>
+      <if test="sp6 != null" >
+        sp_6,
+      </if>
+      <if test="sp7 != null" >
+        sp_7,
+      </if>
+      <if test="sp8 != null" >
+        sp_8,
+      </if>
+      <if test="sp9 != null" >
+        sp_9,
+      </if>
+      <if test="sp10 != null" >
+        sp_10,
+      </if>
+      <if test="sp11 != null" >
+        sp_11,
+      </if>
+      <if test="sp12 != null" >
+        sp_12,
+      </if>
+      <if test="sp13 != null" >
+        sp_13,
+      </if>
+      <if test="sp14 != null" >
+        sp_14,
+      </if>
+      <if test="sp15 != null" >
+        sp_15,
+      </if>
+      <if test="sp16 != null" >
+        sp_16,
+      </if>
+      <if test="sp17 != null" >
+        sp_17,
+      </if>
+      <if test="sp18 != null" >
+        sp_18,
+      </if>
+      <if test="sp19 != null" >
+        sp_19,
+      </if>
+      <if test="sp20 != null" >
+        sp_20,
+      </if>
+      <if test="sp21 != null" >
+        sp_21,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spId != null" >
+        #{spId,jdbcType=INTEGER},
+      </if>
+      <if test="sp1 != null" >
+        #{sp1,jdbcType=DOUBLE},
+      </if>
+      <if test="sp2 != null" >
+        #{sp2,jdbcType=DOUBLE},
+      </if>
+      <if test="sp3 != null" >
+        #{sp3,jdbcType=DOUBLE},
+      </if>
+      <if test="sp4 != null" >
+        #{sp4,jdbcType=DOUBLE},
+      </if>
+      <if test="sp5 != null" >
+        #{sp5,jdbcType=DOUBLE},
+      </if>
+      <if test="sp6 != null" >
+        #{sp6,jdbcType=DOUBLE},
+      </if>
+      <if test="sp7 != null" >
+        #{sp7,jdbcType=DOUBLE},
+      </if>
+      <if test="sp8 != null" >
+        #{sp8,jdbcType=DOUBLE},
+      </if>
+      <if test="sp9 != null" >
+        #{sp9,jdbcType=DOUBLE},
+      </if>
+      <if test="sp10 != null" >
+        #{sp10,jdbcType=DOUBLE},
+      </if>
+      <if test="sp11 != null" >
+        #{sp11,jdbcType=DOUBLE},
+      </if>
+      <if test="sp12 != null" >
+        #{sp12,jdbcType=DOUBLE},
+      </if>
+      <if test="sp13 != null" >
+        #{sp13,jdbcType=DOUBLE},
+      </if>
+      <if test="sp14 != null" >
+        #{sp14,jdbcType=DOUBLE},
+      </if>
+      <if test="sp15 != null" >
+        #{sp15,jdbcType=DOUBLE},
+      </if>
+      <if test="sp16 != null" >
+        #{sp16,jdbcType=DOUBLE},
+      </if>
+      <if test="sp17 != null" >
+        #{sp17,jdbcType=DOUBLE},
+      </if>
+      <if test="sp18 != null" >
+        #{sp18,jdbcType=DOUBLE},
+      </if>
+      <if test="sp19 != null" >
+        #{sp19,jdbcType=DOUBLE},
+      </if>
+      <if test="sp20 != null" >
+        #{sp20,jdbcType=DOUBLE},
+      </if>
+      <if test="sp21 != null" >
+        #{sp21,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.SummaryPropertyExample" resultType="java.lang.Integer" >
+    select count(*) from summary_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update summary_property
+    <set >
+      <if test="record.spId != null" >
+        sp_id = #{record.spId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sp1 != null" >
+        sp_1 = #{record.sp1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp2 != null" >
+        sp_2 = #{record.sp2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp3 != null" >
+        sp_3 = #{record.sp3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp4 != null" >
+        sp_4 = #{record.sp4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp5 != null" >
+        sp_5 = #{record.sp5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp6 != null" >
+        sp_6 = #{record.sp6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp7 != null" >
+        sp_7 = #{record.sp7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp8 != null" >
+        sp_8 = #{record.sp8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp9 != null" >
+        sp_9 = #{record.sp9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp10 != null" >
+        sp_10 = #{record.sp10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp11 != null" >
+        sp_11 = #{record.sp11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp12 != null" >
+        sp_12 = #{record.sp12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp13 != null" >
+        sp_13 = #{record.sp13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp14 != null" >
+        sp_14 = #{record.sp14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp15 != null" >
+        sp_15 = #{record.sp15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp16 != null" >
+        sp_16 = #{record.sp16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp17 != null" >
+        sp_17 = #{record.sp17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp18 != null" >
+        sp_18 = #{record.sp18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp19 != null" >
+        sp_19 = #{record.sp19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp20 != null" >
+        sp_20 = #{record.sp20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sp21 != null" >
+        sp_21 = #{record.sp21,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update summary_property
+    set sp_id = #{record.spId,jdbcType=INTEGER},
+      sp_1 = #{record.sp1,jdbcType=DOUBLE},
+      sp_2 = #{record.sp2,jdbcType=DOUBLE},
+      sp_3 = #{record.sp3,jdbcType=DOUBLE},
+      sp_4 = #{record.sp4,jdbcType=DOUBLE},
+      sp_5 = #{record.sp5,jdbcType=DOUBLE},
+      sp_6 = #{record.sp6,jdbcType=DOUBLE},
+      sp_7 = #{record.sp7,jdbcType=DOUBLE},
+      sp_8 = #{record.sp8,jdbcType=DOUBLE},
+      sp_9 = #{record.sp9,jdbcType=DOUBLE},
+      sp_10 = #{record.sp10,jdbcType=DOUBLE},
+      sp_11 = #{record.sp11,jdbcType=DOUBLE},
+      sp_12 = #{record.sp12,jdbcType=DOUBLE},
+      sp_13 = #{record.sp13,jdbcType=DOUBLE},
+      sp_14 = #{record.sp14,jdbcType=DOUBLE},
+      sp_15 = #{record.sp15,jdbcType=DOUBLE},
+      sp_16 = #{record.sp16,jdbcType=DOUBLE},
+      sp_17 = #{record.sp17,jdbcType=DOUBLE},
+      sp_18 = #{record.sp18,jdbcType=DOUBLE},
+      sp_19 = #{record.sp19,jdbcType=DOUBLE},
+      sp_20 = #{record.sp20,jdbcType=DOUBLE},
+      sp_21 = #{record.sp21,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.SummaryProperty" >
+    update summary_property
+    <set >
+      <if test="sp1 != null" >
+        sp_1 = #{sp1,jdbcType=DOUBLE},
+      </if>
+      <if test="sp2 != null" >
+        sp_2 = #{sp2,jdbcType=DOUBLE},
+      </if>
+      <if test="sp3 != null" >
+        sp_3 = #{sp3,jdbcType=DOUBLE},
+      </if>
+      <if test="sp4 != null" >
+        sp_4 = #{sp4,jdbcType=DOUBLE},
+      </if>
+      <if test="sp5 != null" >
+        sp_5 = #{sp5,jdbcType=DOUBLE},
+      </if>
+      <if test="sp6 != null" >
+        sp_6 = #{sp6,jdbcType=DOUBLE},
+      </if>
+      <if test="sp7 != null" >
+        sp_7 = #{sp7,jdbcType=DOUBLE},
+      </if>
+      <if test="sp8 != null" >
+        sp_8 = #{sp8,jdbcType=DOUBLE},
+      </if>
+      <if test="sp9 != null" >
+        sp_9 = #{sp9,jdbcType=DOUBLE},
+      </if>
+      <if test="sp10 != null" >
+        sp_10 = #{sp10,jdbcType=DOUBLE},
+      </if>
+      <if test="sp11 != null" >
+        sp_11 = #{sp11,jdbcType=DOUBLE},
+      </if>
+      <if test="sp12 != null" >
+        sp_12 = #{sp12,jdbcType=DOUBLE},
+      </if>
+      <if test="sp13 != null" >
+        sp_13 = #{sp13,jdbcType=DOUBLE},
+      </if>
+      <if test="sp14 != null" >
+        sp_14 = #{sp14,jdbcType=DOUBLE},
+      </if>
+      <if test="sp15 != null" >
+        sp_15 = #{sp15,jdbcType=DOUBLE},
+      </if>
+      <if test="sp16 != null" >
+        sp_16 = #{sp16,jdbcType=DOUBLE},
+      </if>
+      <if test="sp17 != null" >
+        sp_17 = #{sp17,jdbcType=DOUBLE},
+      </if>
+      <if test="sp18 != null" >
+        sp_18 = #{sp18,jdbcType=DOUBLE},
+      </if>
+      <if test="sp19 != null" >
+        sp_19 = #{sp19,jdbcType=DOUBLE},
+      </if>
+      <if test="sp20 != null" >
+        sp_20 = #{sp20,jdbcType=DOUBLE},
+      </if>
+      <if test="sp21 != null" >
+        sp_21 = #{sp21,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where sp_id = #{spId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.SummaryProperty" >
+    update summary_property
+    set sp_1 = #{sp1,jdbcType=DOUBLE},
+      sp_2 = #{sp2,jdbcType=DOUBLE},
+      sp_3 = #{sp3,jdbcType=DOUBLE},
+      sp_4 = #{sp4,jdbcType=DOUBLE},
+      sp_5 = #{sp5,jdbcType=DOUBLE},
+      sp_6 = #{sp6,jdbcType=DOUBLE},
+      sp_7 = #{sp7,jdbcType=DOUBLE},
+      sp_8 = #{sp8,jdbcType=DOUBLE},
+      sp_9 = #{sp9,jdbcType=DOUBLE},
+      sp_10 = #{sp10,jdbcType=DOUBLE},
+      sp_11 = #{sp11,jdbcType=DOUBLE},
+      sp_12 = #{sp12,jdbcType=DOUBLE},
+      sp_13 = #{sp13,jdbcType=DOUBLE},
+      sp_14 = #{sp14,jdbcType=DOUBLE},
+      sp_15 = #{sp15,jdbcType=DOUBLE},
+      sp_16 = #{sp16,jdbcType=DOUBLE},
+      sp_17 = #{sp17,jdbcType=DOUBLE},
+      sp_18 = #{sp18,jdbcType=DOUBLE},
+      sp_19 = #{sp19,jdbcType=DOUBLE},
+      sp_20 = #{sp20,jdbcType=DOUBLE},
+      sp_21 = #{sp21,jdbcType=DOUBLE}
+    where sp_id = #{spId,jdbcType=INTEGER}
+  </update>
+</mapper>

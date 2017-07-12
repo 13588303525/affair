@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.RealSummaryCostMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.RealSummaryCost" >
+    <id column="rs_id" property="rsId" jdbcType="INTEGER" />
+    <result column="rs_facility" property="rsFacility" jdbcType="DOUBLE" />
+    <result column="rs_material" property="rsMaterial" jdbcType="DOUBLE" />
+    <result column="rs_travel_cost" property="rsTravelCost" jdbcType="DOUBLE" />
+    <result column="rs_labour_service" property="rsLabourService" jdbcType="DOUBLE" />
+    <result column="rs_meeting_fee" property="rsMeetingFee" jdbcType="DOUBLE" />
+    <result column="rs_spur_fee" property="rsSpurFee" jdbcType="DOUBLE" />
+    <result column="rs_test_processing_fee" property="rsTestProcessingFee" jdbcType="DOUBLE" />
+    <result column="rs_fuel_power_fee" property="rsFuelPowerFee" jdbcType="DOUBLE" />
+    <result column="rs_managment_fee" property="rsManagmentFee" jdbcType="DOUBLE" />
+    <result column="rs_cooperation_fee" property="rsCooperationFee" jdbcType="DOUBLE" />
+    <result column="rs_publish_fee" property="rsPublishFee" jdbcType="DOUBLE" />
+    <result column="rs_expert_consultation" property="rsExpertConsultation" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rs_id, rs_facility, rs_material, rs_travel_cost, rs_labour_service, rs_meeting_fee, 
+    rs_spur_fee, rs_test_processing_fee, rs_fuel_power_fee, rs_managment_fee, rs_cooperation_fee, 
+    rs_publish_fee, rs_expert_consultation
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.RealSummaryCostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from real_summary_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from real_summary_cost
+    where rs_id = #{rsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from real_summary_cost
+    where rs_id = #{rsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.RealSummaryCostExample" >
+    delete from real_summary_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.RealSummaryCost" >
+    insert into real_summary_cost (rs_id, rs_facility, rs_material, 
+      rs_travel_cost, rs_labour_service, rs_meeting_fee, 
+      rs_spur_fee, rs_test_processing_fee, rs_fuel_power_fee, 
+      rs_managment_fee, rs_cooperation_fee, rs_publish_fee, 
+      rs_expert_consultation)
+    values (#{rsId,jdbcType=INTEGER}, #{rsFacility,jdbcType=DOUBLE}, #{rsMaterial,jdbcType=DOUBLE}, 
+      #{rsTravelCost,jdbcType=DOUBLE}, #{rsLabourService,jdbcType=DOUBLE}, #{rsMeetingFee,jdbcType=DOUBLE}, 
+      #{rsSpurFee,jdbcType=DOUBLE}, #{rsTestProcessingFee,jdbcType=DOUBLE}, #{rsFuelPowerFee,jdbcType=DOUBLE}, 
+      #{rsManagmentFee,jdbcType=DOUBLE}, #{rsCooperationFee,jdbcType=DOUBLE}, #{rsPublishFee,jdbcType=DOUBLE}, 
+      #{rsExpertConsultation,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.RealSummaryCost" >
+    insert into real_summary_cost
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rsId != null" >
+        rs_id,
+      </if>
+      <if test="rsFacility != null" >
+        rs_facility,
+      </if>
+      <if test="rsMaterial != null" >
+        rs_material,
+      </if>
+      <if test="rsTravelCost != null" >
+        rs_travel_cost,
+      </if>
+      <if test="rsLabourService != null" >
+        rs_labour_service,
+      </if>
+      <if test="rsMeetingFee != null" >
+        rs_meeting_fee,
+      </if>
+      <if test="rsSpurFee != null" >
+        rs_spur_fee,
+      </if>
+      <if test="rsTestProcessingFee != null" >
+        rs_test_processing_fee,
+      </if>
+      <if test="rsFuelPowerFee != null" >
+        rs_fuel_power_fee,
+      </if>
+      <if test="rsManagmentFee != null" >
+        rs_managment_fee,
+      </if>
+      <if test="rsCooperationFee != null" >
+        rs_cooperation_fee,
+      </if>
+      <if test="rsPublishFee != null" >
+        rs_publish_fee,
+      </if>
+      <if test="rsExpertConsultation != null" >
+        rs_expert_consultation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rsId != null" >
+        #{rsId,jdbcType=INTEGER},
+      </if>
+      <if test="rsFacility != null" >
+        #{rsFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="rsMaterial != null" >
+        #{rsMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="rsTravelCost != null" >
+        #{rsTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="rsLabourService != null" >
+        #{rsLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="rsMeetingFee != null" >
+        #{rsMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsSpurFee != null" >
+        #{rsSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsTestProcessingFee != null" >
+        #{rsTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsFuelPowerFee != null" >
+        #{rsFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsManagmentFee != null" >
+        #{rsManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsCooperationFee != null" >
+        #{rsCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsPublishFee != null" >
+        #{rsPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsExpertConsultation != null" >
+        #{rsExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.RealSummaryCostExample" resultType="java.lang.Integer" >
+    select count(*) from real_summary_cost
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update real_summary_cost
+    <set >
+      <if test="record.rsId != null" >
+        rs_id = #{record.rsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rsFacility != null" >
+        rs_facility = #{record.rsFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsMaterial != null" >
+        rs_material = #{record.rsMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsTravelCost != null" >
+        rs_travel_cost = #{record.rsTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsLabourService != null" >
+        rs_labour_service = #{record.rsLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsMeetingFee != null" >
+        rs_meeting_fee = #{record.rsMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsSpurFee != null" >
+        rs_spur_fee = #{record.rsSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsTestProcessingFee != null" >
+        rs_test_processing_fee = #{record.rsTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsFuelPowerFee != null" >
+        rs_fuel_power_fee = #{record.rsFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsManagmentFee != null" >
+        rs_managment_fee = #{record.rsManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsCooperationFee != null" >
+        rs_cooperation_fee = #{record.rsCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsPublishFee != null" >
+        rs_publish_fee = #{record.rsPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rsExpertConsultation != null" >
+        rs_expert_consultation = #{record.rsExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update real_summary_cost
+    set rs_id = #{record.rsId,jdbcType=INTEGER},
+      rs_facility = #{record.rsFacility,jdbcType=DOUBLE},
+      rs_material = #{record.rsMaterial,jdbcType=DOUBLE},
+      rs_travel_cost = #{record.rsTravelCost,jdbcType=DOUBLE},
+      rs_labour_service = #{record.rsLabourService,jdbcType=DOUBLE},
+      rs_meeting_fee = #{record.rsMeetingFee,jdbcType=DOUBLE},
+      rs_spur_fee = #{record.rsSpurFee,jdbcType=DOUBLE},
+      rs_test_processing_fee = #{record.rsTestProcessingFee,jdbcType=DOUBLE},
+      rs_fuel_power_fee = #{record.rsFuelPowerFee,jdbcType=DOUBLE},
+      rs_managment_fee = #{record.rsManagmentFee,jdbcType=DOUBLE},
+      rs_cooperation_fee = #{record.rsCooperationFee,jdbcType=DOUBLE},
+      rs_publish_fee = #{record.rsPublishFee,jdbcType=DOUBLE},
+      rs_expert_consultation = #{record.rsExpertConsultation,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.RealSummaryCost" >
+    update real_summary_cost
+    <set >
+      <if test="rsFacility != null" >
+        rs_facility = #{rsFacility,jdbcType=DOUBLE},
+      </if>
+      <if test="rsMaterial != null" >
+        rs_material = #{rsMaterial,jdbcType=DOUBLE},
+      </if>
+      <if test="rsTravelCost != null" >
+        rs_travel_cost = #{rsTravelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="rsLabourService != null" >
+        rs_labour_service = #{rsLabourService,jdbcType=DOUBLE},
+      </if>
+      <if test="rsMeetingFee != null" >
+        rs_meeting_fee = #{rsMeetingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsSpurFee != null" >
+        rs_spur_fee = #{rsSpurFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsTestProcessingFee != null" >
+        rs_test_processing_fee = #{rsTestProcessingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsFuelPowerFee != null" >
+        rs_fuel_power_fee = #{rsFuelPowerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsManagmentFee != null" >
+        rs_managment_fee = #{rsManagmentFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsCooperationFee != null" >
+        rs_cooperation_fee = #{rsCooperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsPublishFee != null" >
+        rs_publish_fee = #{rsPublishFee,jdbcType=DOUBLE},
+      </if>
+      <if test="rsExpertConsultation != null" >
+        rs_expert_consultation = #{rsExpertConsultation,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where rs_id = #{rsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.RealSummaryCost" >
+    update real_summary_cost
+    set rs_facility = #{rsFacility,jdbcType=DOUBLE},
+      rs_material = #{rsMaterial,jdbcType=DOUBLE},
+      rs_travel_cost = #{rsTravelCost,jdbcType=DOUBLE},
+      rs_labour_service = #{rsLabourService,jdbcType=DOUBLE},
+      rs_meeting_fee = #{rsMeetingFee,jdbcType=DOUBLE},
+      rs_spur_fee = #{rsSpurFee,jdbcType=DOUBLE},
+      rs_test_processing_fee = #{rsTestProcessingFee,jdbcType=DOUBLE},
+      rs_fuel_power_fee = #{rsFuelPowerFee,jdbcType=DOUBLE},
+      rs_managment_fee = #{rsManagmentFee,jdbcType=DOUBLE},
+      rs_cooperation_fee = #{rsCooperationFee,jdbcType=DOUBLE},
+      rs_publish_fee = #{rsPublishFee,jdbcType=DOUBLE},
+      rs_expert_consultation = #{rsExpertConsultation,jdbcType=DOUBLE}
+    where rs_id = #{rsId,jdbcType=INTEGER}
+  </update>
+</mapper>

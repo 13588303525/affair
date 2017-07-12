@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.EvectionPropertyMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.EvectionProperty" >
+    <id column="ep_id" property="epId" jdbcType="INTEGER" />
+    <result column="ep_address" property="epAddress" jdbcType="VARCHAR" />
+    <result column="ep_reason" property="epReason" jdbcType="VARCHAR" />
+    <result column="ep_starttime" property="epStarttime" jdbcType="TIMESTAMP" />
+    <result column="ep_endtime" property="epEndtime" jdbcType="TIMESTAMP" />
+    <result column="ep_days" property="epDays" jdbcType="INTEGER" />
+    <result column="ep_aircraft_fee" property="epAircraftFee" jdbcType="DOUBLE" />
+    <result column="ep_train_fee" property="epTrainFee" jdbcType="DOUBLE" />
+    <result column="ep_other_traffic_fee" property="epOtherTrafficFee" jdbcType="DOUBLE" />
+    <result column="ep_hotel_cost" property="epHotelCost" jdbcType="DOUBLE" />
+    <result column="ep_food_allowance" property="epFoodAllowance" jdbcType="DOUBLE" />
+    <result column="ep_public_fees" property="epPublicFees" jdbcType="DOUBLE" />
+    <result column="ep_other" property="epOther" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ep_id, ep_address, ep_reason, ep_starttime, ep_endtime, ep_days, ep_aircraft_fee, 
+    ep_train_fee, ep_other_traffic_fee, ep_hotel_cost, ep_food_allowance, ep_public_fees, 
+    ep_other
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.EvectionPropertyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from evection_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from evection_property
+    where ep_id = #{epId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from evection_property
+    where ep_id = #{epId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.EvectionPropertyExample" >
+    delete from evection_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.EvectionProperty" >
+    insert into evection_property (ep_id, ep_address, ep_reason, 
+      ep_starttime, ep_endtime, ep_days, 
+      ep_aircraft_fee, ep_train_fee, ep_other_traffic_fee, 
+      ep_hotel_cost, ep_food_allowance, ep_public_fees, 
+      ep_other)
+    values (#{epId,jdbcType=INTEGER}, #{epAddress,jdbcType=VARCHAR}, #{epReason,jdbcType=VARCHAR}, 
+      #{epStarttime,jdbcType=TIMESTAMP}, #{epEndtime,jdbcType=TIMESTAMP}, #{epDays,jdbcType=INTEGER}, 
+      #{epAircraftFee,jdbcType=DOUBLE}, #{epTrainFee,jdbcType=DOUBLE}, #{epOtherTrafficFee,jdbcType=DOUBLE}, 
+      #{epHotelCost,jdbcType=DOUBLE}, #{epFoodAllowance,jdbcType=DOUBLE}, #{epPublicFees,jdbcType=DOUBLE}, 
+      #{epOther,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.EvectionProperty" >
+    insert into evection_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="epId != null" >
+        ep_id,
+      </if>
+      <if test="epAddress != null" >
+        ep_address,
+      </if>
+      <if test="epReason != null" >
+        ep_reason,
+      </if>
+      <if test="epStarttime != null" >
+        ep_starttime,
+      </if>
+      <if test="epEndtime != null" >
+        ep_endtime,
+      </if>
+      <if test="epDays != null" >
+        ep_days,
+      </if>
+      <if test="epAircraftFee != null" >
+        ep_aircraft_fee,
+      </if>
+      <if test="epTrainFee != null" >
+        ep_train_fee,
+      </if>
+      <if test="epOtherTrafficFee != null" >
+        ep_other_traffic_fee,
+      </if>
+      <if test="epHotelCost != null" >
+        ep_hotel_cost,
+      </if>
+      <if test="epFoodAllowance != null" >
+        ep_food_allowance,
+      </if>
+      <if test="epPublicFees != null" >
+        ep_public_fees,
+      </if>
+      <if test="epOther != null" >
+        ep_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="epId != null" >
+        #{epId,jdbcType=INTEGER},
+      </if>
+      <if test="epAddress != null" >
+        #{epAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="epReason != null" >
+        #{epReason,jdbcType=VARCHAR},
+      </if>
+      <if test="epStarttime != null" >
+        #{epStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="epEndtime != null" >
+        #{epEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="epDays != null" >
+        #{epDays,jdbcType=INTEGER},
+      </if>
+      <if test="epAircraftFee != null" >
+        #{epAircraftFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epTrainFee != null" >
+        #{epTrainFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epOtherTrafficFee != null" >
+        #{epOtherTrafficFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epHotelCost != null" >
+        #{epHotelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="epFoodAllowance != null" >
+        #{epFoodAllowance,jdbcType=DOUBLE},
+      </if>
+      <if test="epPublicFees != null" >
+        #{epPublicFees,jdbcType=DOUBLE},
+      </if>
+      <if test="epOther != null" >
+        #{epOther,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.EvectionPropertyExample" resultType="java.lang.Integer" >
+    select count(*) from evection_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update evection_property
+    <set >
+      <if test="record.epId != null" >
+        ep_id = #{record.epId,jdbcType=INTEGER},
+      </if>
+      <if test="record.epAddress != null" >
+        ep_address = #{record.epAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.epReason != null" >
+        ep_reason = #{record.epReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.epStarttime != null" >
+        ep_starttime = #{record.epStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.epEndtime != null" >
+        ep_endtime = #{record.epEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.epDays != null" >
+        ep_days = #{record.epDays,jdbcType=INTEGER},
+      </if>
+      <if test="record.epAircraftFee != null" >
+        ep_aircraft_fee = #{record.epAircraftFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epTrainFee != null" >
+        ep_train_fee = #{record.epTrainFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epOtherTrafficFee != null" >
+        ep_other_traffic_fee = #{record.epOtherTrafficFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epHotelCost != null" >
+        ep_hotel_cost = #{record.epHotelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epFoodAllowance != null" >
+        ep_food_allowance = #{record.epFoodAllowance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epPublicFees != null" >
+        ep_public_fees = #{record.epPublicFees,jdbcType=DOUBLE},
+      </if>
+      <if test="record.epOther != null" >
+        ep_other = #{record.epOther,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update evection_property
+    set ep_id = #{record.epId,jdbcType=INTEGER},
+      ep_address = #{record.epAddress,jdbcType=VARCHAR},
+      ep_reason = #{record.epReason,jdbcType=VARCHAR},
+      ep_starttime = #{record.epStarttime,jdbcType=TIMESTAMP},
+      ep_endtime = #{record.epEndtime,jdbcType=TIMESTAMP},
+      ep_days = #{record.epDays,jdbcType=INTEGER},
+      ep_aircraft_fee = #{record.epAircraftFee,jdbcType=DOUBLE},
+      ep_train_fee = #{record.epTrainFee,jdbcType=DOUBLE},
+      ep_other_traffic_fee = #{record.epOtherTrafficFee,jdbcType=DOUBLE},
+      ep_hotel_cost = #{record.epHotelCost,jdbcType=DOUBLE},
+      ep_food_allowance = #{record.epFoodAllowance,jdbcType=DOUBLE},
+      ep_public_fees = #{record.epPublicFees,jdbcType=DOUBLE},
+      ep_other = #{record.epOther,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.EvectionProperty" >
+    update evection_property
+    <set >
+      <if test="epAddress != null" >
+        ep_address = #{epAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="epReason != null" >
+        ep_reason = #{epReason,jdbcType=VARCHAR},
+      </if>
+      <if test="epStarttime != null" >
+        ep_starttime = #{epStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="epEndtime != null" >
+        ep_endtime = #{epEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="epDays != null" >
+        ep_days = #{epDays,jdbcType=INTEGER},
+      </if>
+      <if test="epAircraftFee != null" >
+        ep_aircraft_fee = #{epAircraftFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epTrainFee != null" >
+        ep_train_fee = #{epTrainFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epOtherTrafficFee != null" >
+        ep_other_traffic_fee = #{epOtherTrafficFee,jdbcType=DOUBLE},
+      </if>
+      <if test="epHotelCost != null" >
+        ep_hotel_cost = #{epHotelCost,jdbcType=DOUBLE},
+      </if>
+      <if test="epFoodAllowance != null" >
+        ep_food_allowance = #{epFoodAllowance,jdbcType=DOUBLE},
+      </if>
+      <if test="epPublicFees != null" >
+        ep_public_fees = #{epPublicFees,jdbcType=DOUBLE},
+      </if>
+      <if test="epOther != null" >
+        ep_other = #{epOther,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ep_id = #{epId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.EvectionProperty" >
+    update evection_property
+    set ep_address = #{epAddress,jdbcType=VARCHAR},
+      ep_reason = #{epReason,jdbcType=VARCHAR},
+      ep_starttime = #{epStarttime,jdbcType=TIMESTAMP},
+      ep_endtime = #{epEndtime,jdbcType=TIMESTAMP},
+      ep_days = #{epDays,jdbcType=INTEGER},
+      ep_aircraft_fee = #{epAircraftFee,jdbcType=DOUBLE},
+      ep_train_fee = #{epTrainFee,jdbcType=DOUBLE},
+      ep_other_traffic_fee = #{epOtherTrafficFee,jdbcType=DOUBLE},
+      ep_hotel_cost = #{epHotelCost,jdbcType=DOUBLE},
+      ep_food_allowance = #{epFoodAllowance,jdbcType=DOUBLE},
+      ep_public_fees = #{epPublicFees,jdbcType=DOUBLE},
+      ep_other = #{epOther,jdbcType=DOUBLE}
+    where ep_id = #{epId,jdbcType=INTEGER}
+  </update>
+</mapper>

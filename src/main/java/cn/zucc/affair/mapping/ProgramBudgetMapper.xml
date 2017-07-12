@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zucc.affair.dao.ProgramBudgetMapper" >
+  <resultMap id="BaseResultMap" type="cn.zucc.affair.pojo.ProgramBudget" >
+    <id column="pb_id" property="pbId" jdbcType="INTEGER" />
+    <result column="pg_id" property="pgId" jdbcType="INTEGER" />
+    <result column="pg_type_id" property="pgTypeId" jdbcType="INTEGER" />
+    <result column="pb_prepare" property="pbPrepare" jdbcType="DOUBLE" />
+    <result column="pb_apply" property="pbApply" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pb_id, pg_id, pg_type_id, pb_prepare, pb_apply
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zucc.affair.pojo.ProgramBudgetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from program_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from program_budget
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from program_budget
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.zucc.affair.pojo.ProgramBudgetExample" >
+    delete from program_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.zucc.affair.pojo.ProgramBudget" >
+    insert into program_budget (pb_id, pg_id, pg_type_id, 
+      pb_prepare, pb_apply)
+    values (#{pbId,jdbcType=INTEGER}, #{pgId,jdbcType=INTEGER}, #{pgTypeId,jdbcType=INTEGER}, 
+      #{pbPrepare,jdbcType=DOUBLE}, #{pbApply,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zucc.affair.pojo.ProgramBudget" >
+    insert into program_budget
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pbId != null" >
+        pb_id,
+      </if>
+      <if test="pgId != null" >
+        pg_id,
+      </if>
+      <if test="pgTypeId != null" >
+        pg_type_id,
+      </if>
+      <if test="pbPrepare != null" >
+        pb_prepare,
+      </if>
+      <if test="pbApply != null" >
+        pb_apply,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pbId != null" >
+        #{pbId,jdbcType=INTEGER},
+      </if>
+      <if test="pgId != null" >
+        #{pgId,jdbcType=INTEGER},
+      </if>
+      <if test="pgTypeId != null" >
+        #{pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pbPrepare != null" >
+        #{pbPrepare,jdbcType=DOUBLE},
+      </if>
+      <if test="pbApply != null" >
+        #{pbApply,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.zucc.affair.pojo.ProgramBudgetExample" resultType="java.lang.Integer" >
+    select count(*) from program_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update program_budget
+    <set >
+      <if test="record.pbId != null" >
+        pb_id = #{record.pbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgId != null" >
+        pg_id = #{record.pgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pgTypeId != null" >
+        pg_type_id = #{record.pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbPrepare != null" >
+        pb_prepare = #{record.pbPrepare,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pbApply != null" >
+        pb_apply = #{record.pbApply,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update program_budget
+    set pb_id = #{record.pbId,jdbcType=INTEGER},
+      pg_id = #{record.pgId,jdbcType=INTEGER},
+      pg_type_id = #{record.pgTypeId,jdbcType=INTEGER},
+      pb_prepare = #{record.pbPrepare,jdbcType=DOUBLE},
+      pb_apply = #{record.pbApply,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zucc.affair.pojo.ProgramBudget" >
+    update program_budget
+    <set >
+      <if test="pgId != null" >
+        pg_id = #{pgId,jdbcType=INTEGER},
+      </if>
+      <if test="pgTypeId != null" >
+        pg_type_id = #{pgTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pbPrepare != null" >
+        pb_prepare = #{pbPrepare,jdbcType=DOUBLE},
+      </if>
+      <if test="pbApply != null" >
+        pb_apply = #{pbApply,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zucc.affair.pojo.ProgramBudget" >
+    update program_budget
+    set pg_id = #{pgId,jdbcType=INTEGER},
+      pg_type_id = #{pgTypeId,jdbcType=INTEGER},
+      pb_prepare = #{pbPrepare,jdbcType=DOUBLE},
+      pb_apply = #{pbApply,jdbcType=DOUBLE}
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </update>
+</mapper>
